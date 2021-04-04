@@ -32,9 +32,8 @@
 
    ![200703 - 붐톡(간단한 게임:똥 피하기 2) - YouTube](https://i.ytimg.com/vi/R_mURtWKlgU/hqdefault.jpg)
    
+   ![개발 진행](https://user-images.githubusercontent.com/71045957/113512250-bfca2700-959e-11eb-917a-ae1ae0ec99cf.png)
 
-   ![개발 진행](C:\Users\yyl\Desktop\개발 진행.png)4. 개발 일정
-   
 
    | **날짜**             | **내용**                       |
    | -------------------- | ------------------------------ |
