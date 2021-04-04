@@ -1,3 +1,9 @@
+![제목 없음](https://user-images.githubusercontent.com/71045957/113512210-81cd0300-959e-11eb-9203-bc969712a22d.png)
+
+게임명 : 똥피하기
+장르   : Top View 2D 슈팅 게임
+
+
 1. 게임컨셉 (High Concept 및 핵심 메카닉)
 
    플레이어는 제공되는 버튼을 이용하여 움직임
