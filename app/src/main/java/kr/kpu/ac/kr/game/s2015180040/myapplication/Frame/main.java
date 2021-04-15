@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import kr.kpu.ac.kr.game.s2015180040.myapplication.Game.GameObject;
+import kr.kpu.ac.kr.game.s2015180040.myapplication.Game.Player;
+import kr.kpu.ac.kr.game.s2015180040.myapplication.UI.GameView;
 
 public class main {
     private static final String TAG = main.class.getSimpleName();

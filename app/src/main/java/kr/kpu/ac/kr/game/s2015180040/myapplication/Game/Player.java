@@ -3,7 +3,9 @@ package kr.kpu.ac.kr.game.s2015180040.myapplication.Game;
 import android.graphics.Canvas;
 import android.graphics.RectF;
 
+import kr.kpu.ac.kr.game.s2015180040.myapplication.Frame.GameBitmap;
 import kr.kpu.ac.kr.game.s2015180040.myapplication.Frame.main;
+import kr.kpu.ac.kr.game.s2015180040.myapplication.R;
 
 public class Player implements GameObject {
     private static final String TAG = Player.class.getSimpleName();
@@ -45,12 +47,8 @@ public class Player implements GameObject {
         }
 
         fireTime += game.frameTime;
-        if (fireTime >= FIRE_INTERVAL) {
-            fireBullet();
-            fireTime -= FIRE_INTERVAL;
-        }
-    }
 
+        }
 
     public void draw(Canvas canvas) {
         planeBitmap.draw(canvas, x, y);
