@@ -8,7 +8,7 @@ import android.graphics.RectF;
 
 import java.util.HashMap;
 
-import kr.ac.kpu.game.s1234567.dragonflight.ui.view.GameView;
+import kr.kpu.ac.kr.game.s2015180040.myapplication.UI.GameView;
 
 public class GameBitmap {
     private static HashMap<Integer, Bitmap> bitmaps = new HashMap<Integer, Bitmap>();

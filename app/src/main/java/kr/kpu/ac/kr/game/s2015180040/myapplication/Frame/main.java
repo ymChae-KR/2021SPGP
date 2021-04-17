@@ -2,15 +2,21 @@ package kr.kpu.ac.kr.game.s2015180040.myapplication.Frame;
 
 import android.graphics.Canvas;
 import android.view.MotionEvent;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import kr.kpu.ac.kr.game.s2015180040.myapplication.R;
 import kr.kpu.ac.kr.game.s2015180040.myapplication.Game.GameObject;
+import kr.kpu.ac.kr.game.s2015180040.myapplication.Game.Monster;
+import kr.kpu.ac.kr.game.s2015180040.myapplication.Game.MonsterGenerator;
 import kr.kpu.ac.kr.game.s2015180040.myapplication.Game.Player;
+import kr.kpu.ac.kr.game.s2015180040.myapplication.Game.Score;
 import kr.kpu.ac.kr.game.s2015180040.myapplication.UI.GameView;
 
 public class main {
+    public enum Layer {
+        bg1, enemy, bullet, player, bg2, ui, controller, ENEMY_COUNT
+    }
     private static final String TAG = main.class.getSimpleName();
     // singleton
     private static main instance;
@@ -45,9 +51,6 @@ public class main {
         return array.remove(0);
     }
 
-    public enum Layer {
-        bg1, enemy, bullet, player, bg2, ui, controller, ENEMY_COUNT
-    }
     public boolean initResources() {
         if (initialized) {
             return false;
@@ -60,7 +63,7 @@ public class main {
         player = new Player(w/2, h - 300);
         //layers.get(Layer.player.ordinal()).add(player);
         add(Layer.player, player);
-        add(Layer.controller, new EnemyGenerator());
+        add(Layer.controller, new MonsterGenerator();
 
         int margin = (int) (20 * GameView.MULTIPLIER);
         score = new Score(w - margin, margin);
@@ -89,9 +92,9 @@ public class main {
         ArrayList<GameObject> enemies = layers.get(Layer.enemy.ordinal());
         ArrayList<GameObject> bullets = layers.get(Layer.bullet.ordinal());
         for (GameObject o1: enemies) {
-            Enemy enemy = (Enemy) o1;
+            Monster enemy = (Monster) o1;
             boolean collided = false;
-            for (GameObject o2: bullets) {
+            /*for (GameObject o2: bullets) {
                 Bullet bullet = (Bullet) o2;
                 if (CollisionHelper.collides(enemy, bullet)) {
                     remove(bullet, false);
@@ -100,10 +103,9 @@ public class main {
                     collided = true;
                     break;
                 }
-            }
+            }*/
             if (collided) {
                 break;
-            }
         }
     }
 

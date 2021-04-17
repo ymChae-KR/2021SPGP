@@ -16,7 +16,7 @@ public class Player implements GameObject {
     private float x, y;
     private float tx, ty;
     private float speed;
-    private GameBitmap planeBitmap;
+    private GameBitmap playerBitmap;
     private GameBitmap fireBitmap;
 
     public Player(float x, float y) {
@@ -25,8 +25,8 @@ public class Player implements GameObject {
         this.tx = x;
         this.ty = 0;
         this.speed = 800;
-        this.planeBitmap = new GameBitmap(R.mipmap.fighter);
-        this.fireBitmap = new GameBitmap(R.mipmap.laser_0);
+        this.playerBitmap = new GameBitmap(R.mipmap.cookie);
+
         this.fireTime = 0.0f;
     }
 
@@ -51,7 +51,7 @@ public class Player implements GameObject {
         }
 
     public void draw(Canvas canvas) {
-        planeBitmap.draw(canvas, x, y);
+        playerBitmap.draw(canvas, x, y);
         if (fireTime < LASER_DURATION) {
             fireBitmap.draw(canvas, x, y - 50);
         }
