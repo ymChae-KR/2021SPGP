@@ -64,7 +64,7 @@ public class main {
         player = new Player(w/2, h - 300);
         //layers.get(Layer.player.ordinal()).add(player);
         add(Layer.player, player);
-        add(Layer.controller, new MonsterGenerator();
+        add(Layer.controller, new MonsterGenerator());
 
         int margin = (int) (20 * GameView.MULTIPLIER);
         score = new Score(w - margin, margin);
@@ -85,7 +85,8 @@ public class main {
     public void update() {
         //if (!initialized) return;
         for (ArrayList<GameObject> objects: layers) {
-            for (GameObject o : objects) {
+            for (GameObject o : objects)
+            {
                 o.update();
             }
         }
@@ -107,8 +108,9 @@ public class main {
             }*/
             if (collided) {
                 break;
+               }
+            }
         }
-    }
 
     public void draw(Canvas canvas) {
         //if (!initialized) return;
