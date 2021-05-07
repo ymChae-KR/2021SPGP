@@ -19,6 +19,7 @@ public class MainGame {
     private static MainGame instance;
     private Player player;
     private Score score;
+    private HP hp;
 
     public static MainGame get() {
         if (instance == null) {
@@ -49,7 +50,7 @@ public class MainGame {
     }
 
     public enum Layer {
-        bg1, enemy, bullet, player, bg2, ui, controller, ENEMY_COUNT
+        bg1, enemy, bullet, player, bg2, ui, controller, ENEMY_COUNT,
     }
     public boolean initResources() {
         if (initialized) {
@@ -70,11 +71,12 @@ public class MainGame {
         score.setScore(0);
         add(Layer.ui, score);
 
-        VerticalScrollBackground bg = new VerticalScrollBackground(R.mipmap.bg_city, 10);
-        add(Layer.bg1, bg);
+        hp = new HP(200, margin);
+        hp.addScore(player.iLife);
+        add(Layer.ui, hp);
 
-        VerticalScrollBackground clouds = new VerticalScrollBackground(R.mipmap.clouds, 20);
-        add(Layer.bg2, clouds);
+        HorizonScrollBackground bg = new HorizonScrollBackground(R.mipmap.ms_bg, 10);
+        add(Layer.bg1, bg);
 
         initialized = true;
         return true;
@@ -95,6 +97,7 @@ public class MainGame {
             }
         }
 
+        ArrayList<GameObject> playerz = layers.get(Layer.player.ordinal());
         ArrayList<GameObject> enemies = layers.get(Layer.enemy.ordinal());
         ArrayList<GameObject> bullets = layers.get(Layer.bullet.ordinal());
         for (GameObject o1: enemies) {
@@ -110,10 +113,23 @@ public class MainGame {
                     break;
                 }
             }
+
+            // 플레이어 몬스터 충돌 시 플레이어 체력 깎기
+            if (CollisionHelper.collides(enemy, player))
+            {
+                remove(enemy, false);
+                score.addScore(10);
+                collided = true;
+                player.iLife -= 1;
+                hp.subScore(1);
+                Log.d(TAG, "플레이어 체력: " + player.iLife);
+                break;
+            }
             if (collided) {
                 break;
             }
         }
+
 //        for (GameObject o1 : objects) {
 //            if (!(o1 instanceof Enemy)) {
 //                continue;

@@ -39,6 +39,7 @@ public class EnemyGenerator implements GameObject {
         Random r = new Random();
         for (int i = 1; i <= 9; i += 2) {
             int x = tenth * i;
+            Log.d(TAG, "generate: " + x);
             int y = 0;
             int level = wave / 10 - r.nextInt(3);
             if (level < 1) level = 1;

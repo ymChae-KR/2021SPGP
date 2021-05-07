@@ -20,6 +20,8 @@ public class Player implements GameObject, BoxCollidable {
     private GameBitmap planeBitmap;
     private GameBitmap fireBitmap;
 
+    public int iLife;
+
     public Player(float x, float y) {
         this.x = x;
         this.y = y;
@@ -29,6 +31,8 @@ public class Player implements GameObject, BoxCollidable {
         this.planeBitmap = new GameBitmap(R.mipmap.fighter);
         this.fireBitmap = new GameBitmap(R.mipmap.laser_0);
         this.fireTime = 0.0f;
+
+        this.iLife = 3;
     }
 
     public void moveTo(float x, float y) {
@@ -48,10 +52,10 @@ public class Player implements GameObject, BoxCollidable {
         }
 
         fireTime += game.frameTime;
-        if (fireTime >= FIRE_INTERVAL) {
+        /*if (fireTime >= FIRE_INTERVAL) {
             fireBullet();
             fireTime -= FIRE_INTERVAL;
-        }
+        }*/
     }
 
     private void fireBullet() {
