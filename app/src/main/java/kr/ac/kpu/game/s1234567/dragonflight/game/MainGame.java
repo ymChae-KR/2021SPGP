@@ -13,6 +13,7 @@ import kr.ac.kpu.game.s1234567.dragonflight.framework.Recyclable;
 import kr.ac.kpu.game.s1234567.dragonflight.ui.view.GameView;
 import kr.ac.kpu.game.s1234567.dragonflight.utils.CollisionHelper;
 
+
 public class MainGame {
         private static final String TAG = MainGame.class.getSimpleName();
     // singleton
@@ -50,7 +51,7 @@ public class MainGame {
     }
 
     public enum Layer {
-        bg1, enemy, bullet, player, bg2, ui, controller, ENEMY_COUNT,
+        bg1, enemy, bullet, player, bg2, ui, controller, ENEMY_COUNT, effect,
     }
     public boolean initResources() {
         if (initialized) {
@@ -123,8 +124,11 @@ public class MainGame {
                 player.iLife -= 1;
                 hp.subScore(1);
                 Log.d(TAG, "플레이어 체력: " + player.iLife);
-                break;
+
+                Effect ef = new Effect();
+                add(Layer.effect, ef);
             }
+
             if (collided) {
                 break;
             }
