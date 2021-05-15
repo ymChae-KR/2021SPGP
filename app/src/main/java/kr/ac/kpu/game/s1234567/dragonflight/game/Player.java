@@ -28,7 +28,7 @@ public class Player implements GameObject, BoxCollidable {
         this.tx = x;
         this.ty = 0;
         this.speed = 800;
-        this.planeBitmap = new GameBitmap(R.mipmap.fighter);
+        this.planeBitmap = new GameBitmap(R.mipmap.a);
         this.fireBitmap = new GameBitmap(R.mipmap.laser_0);
         this.fireTime = 0.0f;
 

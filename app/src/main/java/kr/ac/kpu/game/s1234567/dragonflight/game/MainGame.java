@@ -76,7 +76,7 @@ public class MainGame {
         hp.addScore(player.iLife);
         add(Layer.ui, hp);
 
-        HorizonScrollBackground bg = new HorizonScrollBackground(R.mipmap.ms_bg, 10);
+        HorizonScrollBackground bg = new HorizonScrollBackground(R.mipmap.ms_bg2, 10);
         add(Layer.bg1, bg);
 
         initialized = true;
@@ -125,8 +125,8 @@ public class MainGame {
                 hp.subScore(1);
                 Log.d(TAG, "플레이어 체력: " + player.iLife);
 
-                Effect ef = new Effect();
-                add(Layer.effect, ef);
+                //Effect ef = new Effect();
+                //add(Layer.effect, ef);
             }
 
             if (collided) {

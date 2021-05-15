@@ -23,8 +23,8 @@ public class Effect implements GameObject {
     private Rect src = new Rect();
     private RectF dst = new RectF();
 
-    public Effect(int right, int top, int iCnt) {
-        bitmap = GameBitmap.load(R.mipmap.effect1);
+    public Effect(Bitmap bit, int right, int top, int iCnt) {
+        bitmap = GameBitmap.load(bit.getGenerationId());
         this.right = right;
         this.top = top;
         this.iCnt = iCnt;

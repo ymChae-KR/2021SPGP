@@ -1,5 +1,6 @@
 package kr.ac.kpu.game.s1234567.dragonflight.game;
 
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.RectF;
 import android.util.Log;
@@ -26,6 +27,8 @@ public class Enemy implements GameObject, BoxCollidable, Recyclable {
     private int level;
     private float y;
     private int speed;
+
+    private Bitmap elseBit;
 
     private Enemy() {
         Log.d(TAG, "Enemy constructor");
@@ -58,7 +61,10 @@ public class Enemy implements GameObject, BoxCollidable, Recyclable {
         MainGame game = MainGame.get();
         y += speed * game.frameTime;
 
-        if (y > GameView.view.getHeight()) {
+        if (y > GameView.view.getHeight() - 220) {
+            Enemy enemy = Enemy.get(level, (int)this.x, (int)this.y, 0);
+            game.add(MainGame.Layer.enemy, enemy);
+
             game.remove(this);
         }
     }
@@ -77,4 +83,11 @@ public class Enemy implements GameObject, BoxCollidable, Recyclable {
     public void recycle() {
         // 재활용통에 들어가는 시점에 불리는 함수. 현재는 할일없음.
     }
+
+
+    public void SetEnemyBitmap(Bitmap bit)
+    {
+        this.elseBit = bit;
+    }
+
 }
