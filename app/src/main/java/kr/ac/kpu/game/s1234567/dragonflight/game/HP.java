@@ -27,7 +27,7 @@ public class HP implements GameObject {
     private RectF dst = new RectF();
 
     public HP(int right, int top) {
-        bitmap = GameBitmap.load(R.mipmap.heart);
+        bitmap = GameBitmap.load(R.mipmap.Heart);
         this.right = right;
         this.top = top;
         this.iHp = 0;
