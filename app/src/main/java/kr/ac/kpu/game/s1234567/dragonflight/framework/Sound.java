@@ -8,11 +8,13 @@ import android.util.Log;
 
 import java.util.HashMap;
 
+import kr.ac.kpu.game.s1234567.dragonflight.R;
+
 public class Sound {
     private static final String TAG = Sound.class.getSimpleName();
     private static SoundPool soundPool;
     private static final int[] SOUND_IDS = {
-//            R.raw.hadouken
+            R.raw.die,
     };
     private static HashMap<Integer, Integer> soundIdMap = new HashMap<>();
 
@@ -39,7 +41,7 @@ public class Sound {
     public static int play(int resId) {
         Log.d(TAG, "play: " + resId);
         int soundId = soundIdMap.get(resId);
-        int streamId = soundPool.play(soundId, 1f, 1f, 1, 0, 1f);
+        int streamId = soundPool.play(soundId, 5f, 5f, 0, 0, 1f);
         return streamId;
     }
 }

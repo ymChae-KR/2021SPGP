@@ -15,6 +15,12 @@ public class Score implements GameObject {
     private final int right;
     private final int top;
 
+    public int getScore()
+    {
+        return this.score;
+    }
+
+
     public void setScore(int score) {
         this.score = score;
         this.displayScore = score;
@@ -32,6 +38,7 @@ public class Score implements GameObject {
         this.right = right;
         this.top = top;
     }
+
     @Override
     public void update() {
         if (displayScore < score) {

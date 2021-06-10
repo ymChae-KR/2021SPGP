@@ -1,15 +1,24 @@
-package kr.ac.kpu.game.s1234567.dragonflight.game;
+package kr.ac.kpu.game.s1234567.dragonflight.Scene;
 
 import android.graphics.Canvas;
+import android.graphics.RectF;
 import android.util.Log;
 import android.view.MotionEvent;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import kr.ac.kpu.game.s1234567.dragonflight.R;
-import kr.ac.kpu.game.s1234567.dragonflight.framework.BoxCollidable;
 import kr.ac.kpu.game.s1234567.dragonflight.framework.GameObject;
 import kr.ac.kpu.game.s1234567.dragonflight.framework.Recyclable;
+import kr.ac.kpu.game.s1234567.dragonflight.framework.Sound;
+import kr.ac.kpu.game.s1234567.dragonflight.game.Bullet;
+import kr.ac.kpu.game.s1234567.dragonflight.game.Button;
+import kr.ac.kpu.game.s1234567.dragonflight.game.Enemy;
+import kr.ac.kpu.game.s1234567.dragonflight.game.EnemyGenerator;
+import kr.ac.kpu.game.s1234567.dragonflight.game.HP;
+import kr.ac.kpu.game.s1234567.dragonflight.game.HorizonScrollBackground;
+import kr.ac.kpu.game.s1234567.dragonflight.game.Player;
+import kr.ac.kpu.game.s1234567.dragonflight.game.Score;
 import kr.ac.kpu.game.s1234567.dragonflight.ui.view.GameView;
 import kr.ac.kpu.game.s1234567.dragonflight.utils.CollisionHelper;
 
@@ -21,6 +30,9 @@ public class MainGame {
     private Player player;
     private Score score;
     private HP hp;
+    private Button bAttack;
+    private Button bHide;
+
 
     public static MainGame get() {
         if (instance == null) {
@@ -62,7 +74,7 @@ public class MainGame {
 
         initLayers(Layer.ENEMY_COUNT.ordinal());
 
-        player = new Player(w/2, h - 300);
+        player = new Player(w/2, h - 280);
         //layers.get(Layer.player.ordinal()).add(player);
         add(Layer.player, player);
         add(Layer.controller, new EnemyGenerator());
@@ -76,8 +88,15 @@ public class MainGame {
         hp.addScore(player.iLife);
         add(Layer.ui, hp);
 
+        bAttack = new Button(100 ,  h -500, 2, false);
+        add(MainGame.Layer.ui, bAttack);
+
+        bHide = new Button(100 ,  h - 800 , 3, false);
+        add(MainGame.Layer.ui, bHide);
+
         HorizonScrollBackground bg = new HorizonScrollBackground(R.mipmap.ms_bg2, 10);
         add(Layer.bg1, bg);
+
 
         initialized = true;
         return true;
@@ -118,12 +137,18 @@ public class MainGame {
             // 플레이어 몬스터 충돌 시 플레이어 체력 깎기
             if (CollisionHelper.collides(enemy, player))
             {
-                remove(enemy, false);
-                score.addScore(10);
-                collided = true;
-                player.iLife -= 1;
-                hp.subScore(1);
-                Log.d(TAG, "플레이어 체력: " + player.iLife);
+                if(!player.getDefend()) {
+                    remove(enemy, false);
+                    //score.addScore(10);
+                    collided = true;
+                    player.iLife -= 1;
+                    if (player.iLife < 0) {
+                        Sound.play(R.raw.die);
+                        GameView.view.pauseGame();
+                    }
+                    hp.subScore(1);
+                    Log.d(TAG, "플레이어 체력: " + player.iLife);
+                }
 
                 //Effect ef = new Effect();
                 //add(Layer.effect, ef);
@@ -178,16 +203,37 @@ public class MainGame {
         int action = event.getAction();
 //        if (action == MotionEvent.ACTION_DOWN) {
         if (action == MotionEvent.ACTION_DOWN || action == MotionEvent.ACTION_MOVE) {
-            player.moveTo(event.getX(), event.getY());
-//            int li = 0;
-//            for (ArrayList<GameObject> objects: layers) {
-//                for (GameObject o : objects) {
-//                    Log.d(TAG, "L:" + li + " " + o);
-//                }
-//                li++;
-//            }
+            RectF rect = new RectF(event.getX(), event.getY(), event.getX() + 10, event.getY() + 10);
+            RectF skillRect = new RectF(player.getPlayerX(), 0, player.getPlayerX() + 100, GameView.view.getHeight());
+
+            if (CollisionHelper.collides_b(bAttack, rect)) {
+                ArrayList<GameObject> enemies = layers.get(Layer.enemy.ordinal());
+                for (GameObject o1 : enemies) {
+                    Enemy enemy = (Enemy) o1;
+                    if (CollisionHelper.collides_b(enemy, skillRect))
+                    {
+                        remove(enemy, false);
+                        score.addScore(10);
+                        break;
+                    }
+                }
+
+            }
+            else if (CollisionHelper.collides_b(bHide, rect))
+            {
+                player.setDefend(true);
+            }
+            else {
+                player.moveTo(event.getX(), event.getY());
+            }
             return true;
+
         }
+
+        if (action == MotionEvent.ACTION_BUTTON_PRESS){
+
+        }
+
         return false;
     }
 
@@ -228,4 +274,24 @@ public class MainGame {
             runnable.run();
         }
     }
+
+    public int getScore()
+    {
+        return score.getScore();
+    }
+
+    public void addatScore(int _a)
+    {
+        score.addScore(_a);
+    }
+
+
+    public void resetGame()
+    {
+        score.setScore(0);
+        player.iLife = 3;
+        hp.addScore(player.iLife );
+
+    }
+
 }

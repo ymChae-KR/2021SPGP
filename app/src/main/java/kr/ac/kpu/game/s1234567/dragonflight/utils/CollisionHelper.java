@@ -22,4 +22,16 @@ public class CollisionHelper {
         //Log.d(TAG, "1:" + rect1 + " 2:" + rect2);
         return true;
     }
+
+    public static boolean collides_b(BoxCollidable o1, RectF rect2) {
+        o1.getBoundingRect(rect1);
+
+        if (rect1.left > rect2.right) return false;
+        if (rect1.top > rect2.bottom) return false;
+        if (rect1.right < rect2.left) return false;
+        if (rect1.bottom < rect2.top) return false;
+
+        //Log.d(TAG, "1:" + rect1 + " 2:" + rect2);
+        return true;
+    }
 }

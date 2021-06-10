@@ -4,9 +4,8 @@ import android.graphics.Canvas;
 import android.graphics.RectF;
 import android.util.Log;
 
-import java.util.ArrayList;
-
 import kr.ac.kpu.game.s1234567.dragonflight.R;
+import kr.ac.kpu.game.s1234567.dragonflight.Scene.MainGame;
 import kr.ac.kpu.game.s1234567.dragonflight.framework.BoxCollidable;
 import kr.ac.kpu.game.s1234567.dragonflight.framework.GameBitmap;
 import kr.ac.kpu.game.s1234567.dragonflight.framework.GameObject;
